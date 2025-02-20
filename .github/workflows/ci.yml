@@ -16,7 +16,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0'
+          dotnet-version: '9.0.100-preview.5'
 
       - name: Install dependencies
         run: dotnet restore
@@ -37,5 +37,5 @@ jobs:
       - name: Build and Push to ECR
         run: |
           docker build -t coreapiapp .
-          docker tag coreapiapp:latest <ECR-REPO-URL>/coreapiapp:latest
-          docker push <ECR-REPO-URL>/coreapiapp:latest
+          docker tag coreapiapp:latest 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/coreapiapp:latest
+          docker push 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/coreapiapp:latest
