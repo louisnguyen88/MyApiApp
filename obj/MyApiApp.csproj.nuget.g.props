@@ -20,6 +20,7 @@
   <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <PkgMicrosoft_Extensions_ApiDescription_Server Condition=" '$(PkgMicrosoft_Extensions_ApiDescription_Server)' == '' ">C:\Users\Louis\.nuget\packages\microsoft.extensions.apidescription.server\6.0.5</PkgMicrosoft_Extensions_ApiDescription_Server>
     <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">C:\Users\Louis\.nuget\packages\awssdk.core\3.7.402.3</PkgAWSSDK_Core>
+    <PkgAWSSDK_SecretsManager Condition=" '$(PkgAWSSDK_SecretsManager)' == '' ">C:\Users\Louis\.nuget\packages\awssdk.secretsmanager\3.7.400.97</PkgAWSSDK_SecretsManager>
     <PkgAWSSDK_Lambda Condition=" '$(PkgAWSSDK_Lambda)' == '' ">C:\Users\Louis\.nuget\packages\awssdk.lambda\3.7.411.40</PkgAWSSDK_Lambda>
     <PkgAWSSDK_ApiGatewayManagementApi Condition=" '$(PkgAWSSDK_ApiGatewayManagementApi)' == '' ">C:\Users\Louis\.nuget\packages\awssdk.apigatewaymanagementapi\3.7.400.95</PkgAWSSDK_ApiGatewayManagementApi>
   </PropertyGroup>

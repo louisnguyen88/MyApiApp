@@ -10,6 +10,7 @@
     <PackageReference Include="AWSSDK.APIGatewayManagementApi" Version="3.7.400.95" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.400" />
     <PackageReference Include="AWSSDK.Lambda" Version="3.7.411.40" />
+    <PackageReference Include="AWSSDK.SecretsManager" Version="3.7.400.97" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

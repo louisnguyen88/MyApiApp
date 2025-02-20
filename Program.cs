@@ -1,4 +1,5 @@
 using Amazon.Lambda;
+using Amazon.SecretsManager;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,8 +8,10 @@ using MyApiApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load AWS Configurations
+// AWS Service Registrations
 builder.Services.AddAWSService<IAmazonLambda>();
+builder.Services.AddAWSService<IAmazonSecretsManager>();
+builder.Services.AddSingleton<SecretManagerService>();
 builder.Services.AddSingleton<ILambdaService, LambdaService>();
 
 // Add Controllers and Swagger

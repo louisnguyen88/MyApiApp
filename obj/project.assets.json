@@ -66,6 +66,22 @@
           }
         }
       },
+      "AWSSDK.SecretsManager/3.7.400.97": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.402.3, 4.0.0)"
+        },
+        "compile": {
+          "lib/net8.0/AWSSDK.SecretsManager.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AWSSDK.SecretsManager.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "Microsoft.AspNetCore.OpenApi/9.0.2": {
         "type": "package",
         "dependencies": {
@@ -480,6 +496,38 @@
         "lib/netstandard2.0/AWSSDK.Lambda.dll",
         "lib/netstandard2.0/AWSSDK.Lambda.pdb",
         "lib/netstandard2.0/AWSSDK.Lambda.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.SecretsManager/3.7.400.97": {
+      "sha512": "p+YMwCeonY2QiQu2QX1fLFwlTpzcEcV2vEm8CH9o8xjY86t3W/bK5ZlTrfAdK1+lHO9Ib9oO8aTyyMW0DsZd0g==",
+      "type": "package",
+      "path": "awssdk.secretsmanager/3.7.400.97",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.SecretsManager.CodeAnalysis.dll",
+        "analyzers/dotnet/cs/SharedAnalysisCode.dll",
+        "awssdk.secretsmanager.3.7.400.97.nupkg.sha512",
+        "awssdk.secretsmanager.nuspec",
+        "images/AWSLogo.png",
+        "lib/net35/AWSSDK.SecretsManager.dll",
+        "lib/net35/AWSSDK.SecretsManager.pdb",
+        "lib/net35/AWSSDK.SecretsManager.xml",
+        "lib/net45/AWSSDK.SecretsManager.dll",
+        "lib/net45/AWSSDK.SecretsManager.pdb",
+        "lib/net45/AWSSDK.SecretsManager.xml",
+        "lib/net8.0/AWSSDK.SecretsManager.dll",
+        "lib/net8.0/AWSSDK.SecretsManager.pdb",
+        "lib/net8.0/AWSSDK.SecretsManager.xml",
+        "lib/netcoreapp3.1/AWSSDK.SecretsManager.dll",
+        "lib/netcoreapp3.1/AWSSDK.SecretsManager.pdb",
+        "lib/netcoreapp3.1/AWSSDK.SecretsManager.xml",
+        "lib/netstandard2.0/AWSSDK.SecretsManager.dll",
+        "lib/netstandard2.0/AWSSDK.SecretsManager.pdb",
+        "lib/netstandard2.0/AWSSDK.SecretsManager.xml",
         "tools/install.ps1",
         "tools/uninstall.ps1"
       ]
@@ -1120,6 +1168,7 @@
       "AWSSDK.APIGatewayManagementApi >= 3.7.400.95",
       "AWSSDK.Extensions.NETCore.Setup >= 3.7.400",
       "AWSSDK.Lambda >= 3.7.411.40",
+      "AWSSDK.SecretsManager >= 3.7.400.97",
       "Microsoft.AspNetCore.OpenApi >= 9.0.2",
       "Microsoft.Extensions.Configuration.Json >= 9.0.2",
       "Newtonsoft.Json >= 13.0.3",
@@ -1188,6 +1237,10 @@
           "AWSSDK.Lambda": {
             "target": "Package",
             "version": "[3.7.411.40, )"
+          },
+          "AWSSDK.SecretsManager": {
+            "target": "Package",
+            "version": "[3.7.400.97, )"
           },
           "Microsoft.AspNetCore.OpenApi": {
             "target": "Package",

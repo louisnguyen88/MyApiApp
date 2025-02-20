@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[3.7.411.40, )"
             },
+            "AWSSDK.SecretsManager": {
+              "target": "Package",
+              "version": "[3.7.400.97, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.2, )"

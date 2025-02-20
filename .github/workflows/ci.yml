@@ -3,7 +3,7 @@ name: .NET Core CI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -27,8 +27,12 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release -o ./publish
 
-      - name: Docker Login
-        run: echo "${{ secrets.AWS_ECR_PASSWORD }}" | docker login -u AWS --password-stdin <ECR-REPO-URL>
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Build and Push to ECR
         run: |
