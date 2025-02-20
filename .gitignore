@@ -1,0 +1,80 @@
+# Build artifacts
+bin/
+obj/
+out/
+publish/
+
+# User-specific files
+*.user
+*.suo
+*.vscode
+*.vs
+*.swp
+*.sln.docstates
+
+# Logs and crash reports
+*.log
+logs/
+debug.log
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Dependencies
+node_modules/
+packages/
+!packages/repositories.config
+
+# OS-specific files
+Thumbs.db
+.DS_Store
+
+# Rider & JetBrains
+.idea/
+*.iml
+
+# Visual Studio Code
+.vscode/
+.history/
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+*.dockerfile
+
+# GitHub Actions
+.github/workflows/*.bak
+.github/workflows/*.log
+
+# AWS Deployment
+aws-deployment/
+.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.envrc
+.aws/
+
+# AWS Secrets and Credentials (if stored locally)
+aws-config.json
+aws-credentials.json
+
+# Ignore ECR Docker images (optional)
+*.tar
+*.img
+*.container
+
+# Ignore Python virtual environment if used for AWS Lambda scripts
+venv/
+__pycache__/
+
+# Ignore Secrets (if used for local development)
+secrets.json
+.env
+
+# Ignore Coverage Reports
+coverage/
+coverage.cobertura.xml
+lcov-report/
+*.coverage
+TestResults/
