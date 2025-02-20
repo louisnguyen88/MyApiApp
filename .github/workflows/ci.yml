@@ -1,0 +1,37 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0'
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish -c Release -o ./publish
+
+      - name: Docker Login
+        run: echo "${{ secrets.AWS_ECR_PASSWORD }}" | docker login -u AWS --password-stdin <ECR-REPO-URL>
+
+      - name: Build and Push to ECR
+        run: |
+          docker build -t coreapiapp .
+          docker tag coreapiapp:latest <ECR-REPO-URL>/coreapiapp:latest
+          docker push <ECR-REPO-URL>/coreapiapp:latest
