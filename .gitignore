@@ -40,7 +40,6 @@ Thumbs.db
 # Docker
 docker-compose.override.yml
 .dockerignore
-*.dockerfile
 
 # GitHub Actions
 .github/workflows/*.bak
