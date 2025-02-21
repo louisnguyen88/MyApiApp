@@ -1,7 +1,10 @@
-name: .NET Core CI
+name: MyApiApp CI
 
 on:
   push:
+    branches:
+      - master
+  pull_request:
     branches:
       - master
 
@@ -10,32 +13,51 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Setup .NET
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '8.0'
 
-      - name: Install dependencies
+      - name: Restore dependencies
         run: dotnet restore
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --no-restore --configuration Release
 
-      - name: Publish
+      - name: Run Tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
+      - name: Publish Application
         run: dotnet publish -c Release -o ./publish
 
-      - name: Configure AWS Credentials
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build Docker Image
+        run: |
+          cd $GITHUB_WORKSPACE  # Ensure in correct directory
+          docker build -t myapiapp -f ./Dockerfile .
+
+      - name: Tag and Push Docker Image to ECR
+        run: |
+          docker tag myapiapp:latest 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/myapiapp:latest
+          docker push 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/myapiapp:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: <AWS_REGION>
 
-      - name: Build and Push to ECR
+      - name: Deploy to ECS
         run: |
-          docker build -t MyApiApp .
-          docker tag MyApiApp:latest 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/MyApiApp:latest
-          docker push 289193905928.dkr.ecr.ap-southeast-2.amazonaws.com/my_api_app/MyApiApp:latest
+          aws ecs update-service --cluster my-cluster --service myapiapp-service --force-new-deployment
