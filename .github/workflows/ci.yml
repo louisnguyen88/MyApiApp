@@ -77,9 +77,9 @@ jobs:
 
       - name: Deploy to ECS
         run: |
-          aws ecs update-service --cluster my-cluster --service myapiapp-service --force-new-deployment
+          aws ecs update-service --cluster MyApiAppCluster --service myapiapp-service --force-new-deployment
 
       - name: Verify Deployment
         run: |
-          aws ecs wait services-stable --cluster my-cluster --services myapiapp-service
+          aws ecs wait services-stable --cluster MyApiAppCluster --services MyApiAppService
           echo "Deployment completed successfully"
