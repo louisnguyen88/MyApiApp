@@ -58,11 +58,6 @@ terraform.tfstate.backup
 aws-config.json
 aws-credentials.json
 
-# Ignore ECR Docker images (optional)
-*.tar
-*.img
-*.container
-
 # Ignore Python virtual environment if used for AWS Lambda scripts
 venv/
 __pycache__/
