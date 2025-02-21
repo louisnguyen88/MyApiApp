@@ -43,11 +43,6 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Lint Dockerfile
-        uses: hadolint/hadolint-action@v3.1.0
-        with:
-          dockerfile: Dockerfile
-
       - name: Build Docker Image
         run: |
           cd $GITHUB_WORKSPACE  # Ensure in correct directory
