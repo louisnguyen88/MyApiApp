@@ -43,25 +43,17 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
-      - name: Build Docker Image
-        run: |
-          cd $GITHUB_WORKSPACE  # Ensure in correct directory
-          docker build -t myapiapp -f ./Dockerfile .
-
-      - name: Scan Docker image
-        uses: anchore/scan-action@v3
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
         with:
-          image: "myapiapp:latest"
-          fail-build: true
-          severity-cutoff: high
-
-      - name: Tag and Push Docker Image to ECR
-        run: |
-          TIMESTAMP=$(date +%Y%m%d%H%M%S)
-          docker tag myapiapp:latest ${{ secrets.ECR_REPO_URL }}:$TIMESTAMP
-          docker push ${{ secrets.ECR_REPO_URL }}:$TIMESTAMP
-          docker tag myapiapp:latest ${{ secrets.ECR_REPO_URL }}:latest
-          docker push ${{ secrets.ECR_REPO_URL }}:latest
+            context: .
+            push: true
+            tags: |
+              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPO_URL }}:latest
+              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPO_URL }}:latest
+            file: ./Dockerfile
+            build-args: |
+              --progress=plain
 
   deploy:
     needs: build
