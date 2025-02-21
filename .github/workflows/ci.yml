@@ -43,13 +43,28 @@ jobs:
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
 
+      - name: Lint Dockerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+
       - name: Build Docker Image
         run: |
           cd $GITHUB_WORKSPACE  # Ensure in correct directory
           docker build -t myapiapp -f ./Dockerfile .
 
+      - name: Scan Docker image
+        uses: anchore/scan-action@v3
+        with:
+          image: "myapiapp:latest"
+          fail-build: true
+          severity-cutoff: high
+
       - name: Tag and Push Docker Image to ECR
         run: |
+          TIMESTAMP=$(date +%Y%m%d%H%M%S)
+          docker tag myapiapp:latest ${{ secrets.ECR_REPO_URL }}:$TIMESTAMP
+          docker push ${{ secrets.ECR_REPO_URL }}:$TIMESTAMP
           docker tag myapiapp:latest ${{ secrets.ECR_REPO_URL }}:latest
           docker push ${{ secrets.ECR_REPO_URL }}:latest
 
@@ -68,3 +83,8 @@ jobs:
       - name: Deploy to ECS
         run: |
           aws ecs update-service --cluster my-cluster --service myapiapp-service --force-new-deployment
+
+      - name: Verify Deployment
+        run: |
+          aws ecs wait services-stable --cluster my-cluster --services myapiapp-service
+          echo "Deployment completed successfully"
