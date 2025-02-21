@@ -46,14 +46,12 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-            context: .
-            push: true
-            tags: |
-              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPO_URL }}:latest
-              ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPO_URL }}:latest
-            file: ./Dockerfile
-            build-args: |
-              --progress=plain
+          context: .
+          push: true
+          tags: |
+            ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.ECR_REPO_URL }}:latest
+          file: ./Dockerfile
+      
 
   deploy:
     needs: build
